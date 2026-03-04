@@ -1,0 +1,48 @@
+{
+  "name": "Galaksen – Romutforsker",
+  "short_name": "Galaksen",
+  "description": "Utforsk planeter og stjerner i solsystemet – interaktiv romapp",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#030712",
+  "theme_color": "#00b3ff",
+  "orientation": "any",
+  "lang": "no",
+  "categories": ["education", "science"],
+  "icons": [
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Planetskanner",
+      "short_name": "Planeter",
+      "description": "Se informasjon om planetene",
+      "url": "./?section=scanner"
+    },
+    {
+      "name": "Stjerner",
+      "short_name": "Stjerner",
+      "description": "Utforsk kjente stjerner",
+      "url": "./?section=stars"
+    }
+  ]
+}

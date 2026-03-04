@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Background circle -->
+  <circle cx="256" cy="256" r="256" fill="#030712"/>
+  <!-- Aurora glow rings -->
+  <circle cx="256" cy="256" r="220" fill="none" stroke="#00b3ff" stroke-width="3" opacity="0.3"/>
+  <circle cx="256" cy="256" r="180" fill="none" stroke="#00ffa3" stroke-width="2" opacity="0.25"/>
+  <!-- Galaxy core glow -->
+  <radialGradient id="gcore" cx="50%" cy="50%" r="50%">
+    <stop offset="0%"  stop-color="#ffffff" stop-opacity="0.9"/>
+    <stop offset="30%" stop-color="#00b3ff" stop-opacity="0.7"/>
+    <stop offset="70%" stop-color="#7c3aed" stop-opacity="0.4"/>
+    <stop offset="100%" stop-color="#030712" stop-opacity="0"/>
+  </radialGradient>
+  <circle cx="256" cy="256" r="200" fill="url(#gcore)"/>
+  <!-- Galaxy spiral arms (simplified) -->
+  <g opacity="0.6" fill="none" stroke-linecap="round">
+    <path d="M256,256 Q310,210 340,160 Q360,120 310,100" stroke="#00ffa3" stroke-width="8" fill="none"/>
+    <path d="M256,256 Q200,300 170,355 Q150,395 200,415" stroke="#00ffa3" stroke-width="8" fill="none"/>
+    <path d="M256,256 Q305,295 355,270 Q395,250 390,200" stroke="#00b3ff" stroke-width="6" fill="none"/>
+    <path d="M256,256 Q210,215 160,240 Q120,260 130,310" stroke="#00b3ff" stroke-width="6" fill="none"/>
+  </g>
+  <!-- Stars scattered -->
+  <circle cx="160" cy="130" r="3" fill="#ffffff" opacity="0.9"/>
+  <circle cx="380" cy="150" r="2" fill="#ffffff" opacity="0.8"/>
+  <circle cx="120" cy="320" r="2.5" fill="#ffffff" opacity="0.7"/>
+  <circle cx="390" cy="360" r="2" fill="#ffffff" opacity="0.9"/>
+  <circle cx="310" cy="410" r="1.5" fill="#ffffff" opacity="0.6"/>
+  <circle cx="80"  cy="200" r="2" fill="#ffffff" opacity="0.75"/>
+  <circle cx="430" cy="270" r="2" fill="#ffffff" opacity="0.7"/>
+  <circle cx="200" cy="440" r="1.5" fill="#ffffff" opacity="0.65"/>
+  <!-- Central planet -->
+  <circle cx="256" cy="256" r="46" fill="none"/>
+  <radialGradient id="planet" cx="38%" cy="38%" r="62%">
+    <stop offset="0%"  stop-color="#7dd3fc"/>
+    <stop offset="45%" stop-color="#0284c7"/>
+    <stop offset="100%" stop-color="#0c4a6e"/>
+  </radialGradient>
+  <circle cx="256" cy="256" r="46" fill="url(#planet)"/>
+  <!-- Planet ring (Saturn-like) -->
+  <ellipse cx="256" cy="256" rx="80" ry="18" fill="none" stroke="#f5e08a" stroke-width="5" opacity="0.7"/>
+  <!-- App name text -->
+  <text x="256" y="470" text-anchor="middle" font-family="system-ui,sans-serif"
+        font-size="42" font-weight="800" fill="#00b3ff" letter-spacing="2">GALAKSEN</text>
+</svg>
