@@ -3,7 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aurora Space Explorer</title>
+  <title>Galaksen – Romutforsker</title>
+
+  <!-- PWA manifest -->
+  <link rel="manifest" href="manifest.json" />
+
+  <!-- Theme & status bar -->
+  <meta name="theme-color" content="#00b3ff" />
+  <meta name="mobile-web-app-capable" content="yes" />
+
+  <!-- iOS Safari PWA support -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Galaksen" />
+  <!-- iOS Safari apple-touch-icon requires PNG (SVG not supported on iOS) -->
+  <link rel="apple-touch-icon" href="icons/icon-180.png" />
+
+  <!-- SEO / description -->
+  <meta name="description" content="Utforsk planeter og stjerner i solsystemet – interaktiv romapp" />
+
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -19,7 +38,7 @@
   <header class="site-header">
     <div class="logo">
       <span class="logo-icon">🌌</span>
-      <span class="logo-text">Aurora Space Explorer</span>
+      <span class="logo-text">Galaksen</span>
     </div>
     <nav class="main-nav">
       <button class="nav-btn active" data-section="scanner">🪐 Planetskanner</button>
@@ -71,6 +90,66 @@
     </section>
   </main>
 
+  <!-- PWA install banner -->
+  <div class="install-banner" id="installBanner" hidden>
+    <div class="install-banner-inner">
+      <img src="icons/icon.svg" alt="Galaksen ikon" class="install-icon" />
+      <div class="install-text">
+        <strong>Installer Galaksen</strong>
+        <span>Legg til på hjemskjermen for raskere tilgang</span>
+      </div>
+      <button class="install-btn" id="installBtn">Installer</button>
+      <button class="install-dismiss" id="installDismiss" aria-label="Lukk">✕</button>
+    </div>
+  </div>
+
   <script src="js/app.js"></script>
+  <script>
+    /* ── Service Worker registration ── */
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(() => {});
+      });
+    }
+
+    /* ── PWA install prompt ── */
+    let deferredPrompt = null;
+    const banner   = document.getElementById('installBanner');
+    const installBtn = document.getElementById('installBtn');
+    const dismissBtn = document.getElementById('installDismiss');
+
+    window.addEventListener('beforeinstallprompt', e => {
+      e.preventDefault();
+      deferredPrompt = e;
+      banner.hidden = false;
+    });
+
+    installBtn.addEventListener('click', async () => {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      deferredPrompt = null;
+      banner.hidden = true;
+    });
+
+    dismissBtn.addEventListener('click', () => {
+      banner.hidden = true;
+    });
+
+    window.addEventListener('appinstalled', () => {
+      banner.hidden = true;
+      deferredPrompt = null;
+    });
+
+    /* ── Deep-link via ?section= query param (used by manifest shortcuts) ── */
+    /* Valid sections match the data-section attributes: 'scanner' | 'stars' */
+    const VALID_SECTIONS = new Set(['scanner', 'stars']);
+    const params = new URLSearchParams(location.search);
+    const sec = params.get('section');
+    if (sec && VALID_SECTIONS.has(sec)) {
+      const btn = document.querySelector(`.nav-btn[data-section="${sec}"]`);
+      if (btn) btn.click();
+    }
+  </script>
 </body>
 </html>
